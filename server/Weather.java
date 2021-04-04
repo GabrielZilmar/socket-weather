@@ -1,5 +1,13 @@
 import java.util.Random;
 
+/**
+ * @author Erick Lage e Gabriel Zilmar
+ * @version 04/04/2021
+ */
+
+/**
+ * Classe Weather
+ */
 public class Weather {
     private String status;
     private String[] possibleWeather = { "Sunny", "Cloudy", "Partially cloudy", "Raining", "Snowing" };
@@ -27,6 +35,9 @@ public class Weather {
         this.temperature = temperature;
     }
 
+    /**
+     * Metodo que altera de forma randomica o clima
+     */
     void changeWeather() {
         int n = r.nextInt(5);
         status = possibleWeather[n];

@@ -11,6 +11,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author Erick Lage e Gabriel Zilmar
+ * @version 04/04/2021
+ */
+
+/**
+ * Classe server, responsavel pelo servidor
+ */
 class Server {
     private int port;
     private List<PrintStream> clients;
@@ -22,6 +30,11 @@ class Server {
         this.weather = new Weather();
     }
 
+    /**
+     * Metodo que inicia o servidor e aceita novos clientes
+     * 
+     * @throws IOException
+     */
     public void start() throws IOException {
         ServerSocket server = new ServerSocket(this.port);
         System.out.println("Server open on port " + this.port);
@@ -38,6 +51,9 @@ class Server {
         }
     }
 
+    /**
+     * Metodo que envia mensagem para os clientes
+     */
     public void sendMessage() {
         Date now = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -50,6 +66,9 @@ class Server {
     }
 }
 
+/**
+ * Classe ClienteHandler, faz a comunicação entre os clientes
+ */
 class ClientHandler implements Runnable {
     private Server server;
     private int flag;
@@ -59,6 +78,10 @@ class ClientHandler implements Runnable {
         this.flag = flag;
     }
 
+    /**
+     * Metodo run, e executado para chamar o envio de mensagem e enviar para todos
+     * os clientes
+     */
     public void run() {
         if (this.flag == 0) {
             new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -71,7 +94,15 @@ class ClientHandler implements Runnable {
     }
 }
 
+/**
+ * Classe Principal Monitor
+ */
 public class Monitor {
+    /**
+     * Metodo main, le a porta que o servidor ira rodar e o inicia
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 

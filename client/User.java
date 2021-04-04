@@ -1,10 +1,17 @@
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
+/**
+ * @author Erick Lage e Gabriel Zilmar
+ * @version 04/04/2021
+ */
+
+/**
+ * Classe Cliente
+ */
 class Client {
     private String host;
     private int port;
@@ -14,6 +21,12 @@ class Client {
         this.port = port;
     }
 
+    /**
+     * Metodo que inicia o cliente
+     * 
+     * @throws UnknownHostException
+     * @throws IOException
+     */
     public void start() throws UnknownHostException, IOException {
         Socket client = new Socket(this.host, this.port);
         System.out.println("Client connected!");
@@ -23,6 +36,9 @@ class Client {
     }
 }
 
+/**
+ * Classe ReceiveMessage, recebe as mensagens
+ */
 class ReceiveMessage implements Runnable {
     private InputStream server;
 
@@ -30,6 +46,9 @@ class ReceiveMessage implements Runnable {
         this.server = server;
     }
 
+    /**
+     * Metodo run, executado para mostrar as mensagens recebidas.
+     */
     public void run() {
         Scanner scan = new Scanner(this.server);
         while (scan.hasNextLine()) {
@@ -39,7 +58,15 @@ class ReceiveMessage implements Runnable {
     }
 }
 
+/**
+ * Classe Principal User
+ */
 public class User {
+    /**
+     * Metodo main, le a porta para se conectar ao servidor
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
